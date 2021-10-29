@@ -1,0 +1,566 @@
+[
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 17.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 11.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 12.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 10.0
+  },
+  {
+    "map_count": 50,
+    "data_local_count": 32,
+    "rack_local_count": 18,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 50,
+    "data_local_count": 32,
+    "rack_local_count": 18,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 16.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 50,
+    "data_local_count": 32,
+    "rack_local_count": 18,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 10.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 16.0
+  },
+  {
+    "map_count": 200,
+    "data_local_count": 130,
+    "rack_local_count": 70,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 22.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 22.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 11.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 100,
+    "data_local_count": 65,
+    "rack_local_count": 35,
+    "run_time": 23.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 101,
+    "data_local_count": 66,
+    "rack_local_count": 35,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 23.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 22.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 12.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 410,
+    "data_local_count": 266,
+    "rack_local_count": 144,
+    "run_time": 74.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 22.0
+  },
+  {
+    "map_count": 200,
+    "data_local_count": 130,
+    "rack_local_count": 70,
+    "run_time": 85.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 1229,
+    "data_local_count": 799,
+    "rack_local_count": 430,
+    "run_time": 441.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 16.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 17.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 23.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 50,
+    "data_local_count": 32,
+    "rack_local_count": 18,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 17.0
+  },
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 12.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 10.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 22.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 22.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 23.0
+  },
+  {
+    "map_count": 2,
+    "data_local_count": 1,
+    "rack_local_count": 1,
+    "run_time": 21.0
+  },
+  {
+    "map_count": 10,
+    "data_local_count": 6,
+    "rack_local_count": 4,
+    "run_time": 12.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 17.0
+  },
+  {
+    "map_count": 1200,
+    "data_local_count": 780,
+    "rack_local_count": 420,
+    "run_time": 600.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 400,
+    "data_local_count": 260,
+    "rack_local_count": 140,
+    "run_time": 23.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 19.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 100,
+    "data_local_count": 65,
+    "rack_local_count": 35,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 15.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 20.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 14.0
+  },
+  {
+    "map_count": 1,
+    "data_local_count": 1,
+    "rack_local_count": 0,
+    "run_time": 13.0
+  }
+]

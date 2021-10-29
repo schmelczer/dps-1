@@ -1,0 +1,8 @@
+hadoop
+derby
+hive
+*.tar.gz
+.env
+*.txt
+__pycache__
+.DS_Store
