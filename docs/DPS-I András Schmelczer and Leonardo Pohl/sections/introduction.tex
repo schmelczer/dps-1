@@ -1,0 +1,15 @@
+\section{Introduction}
+
+Facebook is one of the most prominent data collectors on the internet \cite{DwyerTim2016Cmap}. Facebook stores its data in a data warehouse that was over 2 PB in size and increased by 15 TB each day. Due to the company's nature, many researchers and developers execute various data processing tasks simultaneously. In the example of Facebook, these jobs can be short ad-hoc queries through Hive \cite{thusoo2009hive} or large multi-hour machine learning jobs. 
+
+Therefore, it is crucial to implement a scheduling system that provides fair sharing, i.e. that all resources are distributed fairly, thus decreasing latency. With this goal in mind, the authors, M. Zaharia, D. Brothakur, J. S. Sarma, K. Elmeleegy, S. Shenker and I. Stoica, developed the \textbf{Hadoop Fair Scheduler} (HFS). The authors also found a way of increasing data locality which improved the system's overall throughput.
+
+This analysis will have a detailed look into the experiments that the authors ran. We will also reproduce one of the experiments. The results and source code of our reproducibility study can be viewed on \href{https://github.com/schmelczerandras/dps-1-delay-scheduling}{GitHub}\footnote{\href{https://github.com/schmelczerandras/dps-1-delay-scheduling}{https://github.com/schmelczerandras/dps-1-delay-scheduling}}.
+\\
+\subsection{Delay Scheduling}
+
+In their paper \cite{ds}, Zaharia et al. explain their process of development of "Delay Scheduling" --- the theoretical background of HFS --- and what experiments were run to test its performance.
+
+The authors observed that fairness could be achieved by instead of killing jobs to free up resources, waiting for jobs to finish can also be sufficient to have enough available resources in a large cluster. Many jobs finish every second, always freeing up some space that was not available when the job that needs to be scheduled was enqueued. In combination with this, Zaharia et al. found that it can be faster to wait for available resources on a node that can supply data locality, rather than a node with available computing resources but where data has to be transferred.
+
+An important point that is stressed is \textbf{Hierarchical Scheduling}. Hierarchical scheduling ensures that urgent and production jobs have a predictable running time. These jobs should therefore be treated with a higher priority by the scheduler than, for instance, an experimental machine learning jobs.

@@ -1,0 +1,92 @@
+\section{Experiments}
+
+In this section, we will take a closer look at what kind of experiments were conducted in the scope of \cite{ds}. We will look at the goal of each experiment, what kind of infrastructure was utilised and at what scale. Furthermore, we will look at how many times the experiments were repeated and what kind of statistical methods were applied.
+
+First, we will look at an experiment conducted to determine the relation of a variable and not to evaluate the paper's results.
+Then our focus goes to the evaluation section of the paper, where multiple experiments have been conducted.
+
+\subsection{Analysis of the influence of the maximum skipcount \textbf{$D$}}
+
+In their paper, the authors introduced a simple Delay Scheduling algorithm, which implements Fair Sharing. The authors describe that if a job has unlaunched tasks $t$ and data on the local node, then it gets skipped until the \texttt{skipcount} reaches $D$. At that time, it is launched on that node anyways. With this condition, the authors want to improve the locality of jobs since a job's execution is delayed $D$ times unless data for the job is present on that node.
+
+In this first experiment, the authors experiment with this variable $D$ to find the best balance between having a job wait and achieving locality and executing the job even if there is no local data available. They concluded that the non-locality decreases exponentially with $D$. Furthermore, the authors found that the waiting required to achieve a given locality level is a fraction of the average task length and decreases linearly with the number of slots per node $L$. This experiment implies that waiting for resources to clear up is often more efficient than seeking resources on other nodes, confirming their theory.
+
+The authors did not elaborate on the infrastructure used and how many times did they execute the experiment. We find it likely that they used a simulation for this setup using the traces and logs of their production system. Fortunately, Zaharia et al. disclosed more information about the used infrastructure in future experiments, giving us reason to believe that they used the same infrastructure for this experiment.
+
+\subsection{Evaluation of HFS and Delay Scheduling}
+
+To evaluate the results of their research, the authors ran all the following experiments on Amazon EC2 with a 100 nodes. Each node had four 2 GHz cores, four disks and 15 GB RAM. The EC2 nodes had four \textit{map} and two \textit{reduce} slots per node. 
+
+The job sizes were quantised into nine bins, ranging from one map job in bin one to over 1500 map jobs in bin 9. The authors adapted the distribution of different jobs coming from a particular bin based on the number of actual percentiles of Facebook of the bin. For example, $14\%$ of all the jobs at Facebook in a week in October 2009 came from bin 3, with three to twenty maps. So also $14\%$ of all jobs in the benchmark are from bin 3.
+
+The authors separated the experiments into two categories, Macro- and Microbenchmarks. While macrobenchmarks focus more on regular user activity, microbenchmarks aim to test specific stress points of delay scheduling or scheduling in general.
+
+\subsection{Macrobenchmarks}
+
+As mentioned before, over a week in October 2009, the authors measured the workload distribution on Facebook. The authors used this information to sample 100 jobs to simulate realistic inter-arrival times and input sizes for a multi-user workload on a regular day. This distribution can be seen in Table \ref{tab2}. Three different workloads have been created to test different scenarios:
+
+\begin{itemize}
+    \item An IO-heavy workload
+    \item A CPU-heavy workload
+    \item A mixed workload which includes all jobs of the benchmark
+\end{itemize}
+
+The following sections will give an overview of how they created the data to ensure that the jobs were IO and CPU heavy, respectively.
+
+\begin{table}
+\centering
+\caption{Distribution of job sizes (in terms of number of map tasks) at Facebook.}\label{tab2}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Bin} & \textbf{Maps} & \textbf{Jobs at Facebook} \\ \hline
+1  & 1 & 39$\%$       \\ \hline
+2  & 2 & 16$\%$       \\ \hline
+3  & 3-20 & 14$\%$       \\ \hline
+4  & 21-60 & 9$\%$       \\ \hline
+5  & 61-150 & 6$\%$       \\ \hline
+6  & 150-300 & 6$\%$       \\ \hline
+7  & 301-500 & 4$\%$       \\ \hline
+8  & 501-1500 & 4$\%$       \\ \hline
+9  & >1501 & 3$\%$       \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{IO-heavy workload}
+
+As an IO-heavy workload, the authors ran a task looking for a rare pattern in a large dataset, so the jobs are almost entirely bound to disk IO.
+
+Zaharia et al. provided no information on whether they have repeated the experiments multiple times or not. But the error bars in Figure \ref{fig:original_10} suggest that various experiments had been conducted.
+
+As mentioned before a statistical means of this experiment was the calculation of the standard derivation.
+
+\subsubsection{CPU-heavy workload}
+
+To achieve an almost purely CPU-limited task, the authors run an expensive user-defined function on each input record, only outputting $0.01\%$ of the records and slowing down the jobs significantly.
+
+With this experiment the authors want to ensure that even under a CPU-heavy load, such as Machine Learning or an in-depth analysis of the data like clustering, delay scheduling manages to outperform the FIFO scheduler, which was in place at that time.
+
+\subsubsection{Mixed workload}
+
+The mixed workload experiment aims at presenting a realistic high workload for the scheduling system. The jobs that are submitted during this experiment contain both CPU-heavy and IO-heavy workloads. Furthermore, the job pool also contains a variety of short and long jobs.
+
+\subsection{Microbenchmarks}
+
+Microbenchmarks try to stress test Delay scheduling in more specific cases, where locality is hard to achieve. These experiments try to test the quality of the introduced scheduling method in a more controlled manner.
+
+\subsubsection{Hierarchical scheduling}
+
+In their paper, the authors introduced a hierarchical scheduling policy, which prioritises jobs that need to be run on production for customers like queries etc. These jobs require a higher priority than experimental machine learning tasks. This experiment aimed at evaluating this scheduling policy, the Hadoop Fair Scheduler (HFS). It tries to measure how quickly resources are given to new jobs, based on the job's priority.
+
+\subsubsection{Delay scheduling with small jobs}
+
+Small jobs can pose a challenge to scheduling systems due to the high amount of throughput they require. In this experiment, the authors show how small jobs that are handled by a system utilising delay scheduling compare to those that do not use delay scheduling. They created three different filter jobs, one with three, one with ten and one with 100 map tasks.
+
+This experiment was not run on an Amazon EC2, but rather on a private cluster. The private cluster also had 100 nodes, but 8 cores and 4 disks per node. Contrary to the EC2 cluster it had 6 instead of 4 map slots and 4 instead of 2 reduce slots per node.
+
+We are unsure why the authors picked a private cluster to run this experiment. The private cluster has been defined before this experiment but it was never mentioned as the utilised resource.
+
+\subsubsection{Delay Scheduling with Sticky Slots}
+
+Earlier in the paper, the authors introduced so called \textit{Sticky Slots}. These \textit{Sticky Slots} occur when a task gets repeatedly submitted to the same slot. This happens when a job never leaves its original slot. Sticky slots can have a negative impact on locality of a job.
+
+In their experiment, Zaharia et al. reproduced this locality problem by creating a 180-GB dataset, which was spread in 2 GB chunks over all 100 nodes in the EC2 Cluster. Then 5 and 50 jobs were submitted which caused the sticky slot phenomenon to occur.

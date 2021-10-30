@@ -1,0 +1,58 @@
+
+%\documentclass[runningheads]{llncs}
+\documentclass[14pt, times, twoside]{zHenriquesLab-StyleBioRxiv}
+%
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{amsmath}
+%\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{blindtext}
+
+\begin{document}
+\leadauthor{L. Pohl, A. Schmelczer} 
+%
+
+\title{Assignment 1: Reproducibility Study\\\Large Delay scheduling: a simple technique for achieving locality and fairness in cluster scheduling\\\large Distributed Data Processing}
+\shorttitle{Assignment 1: Reproducibility Study}
+%
+%\titlerunning{Reproducibility Study}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+%\author{Leonardo Pohl and András Schmelczer}
+%\institute{Leiden Institute of Advanced Computer Science, Universiteit Leiden, Leiden, Netherlands}
+\author[1]{András Schmelczer}
+\author[1]{Leonardo Pohl}
+
+\affil[1]{Leiden Institute for Advanced Computer Science, Universiteit Leiden, Leiden, Netherlands}
+
+%
+%\authorrunning{}
+%\institute{Leiden University}
+\maketitle              % typeset the header of the contribution
+
+\begin{abstract}
+    An essential part of modern computing systems is the evaluation of their functionality. In their 2010 paper \cite{ds}, Zaharia et al. introduced a new scheduling paradigm that was to be used for large cluster computing systems. In this report, we will look at what the authors achieved and what experiments they conducted to ensure their achievements validity. Furthermore, we will reproduce one of their experiments and evaluate the differences that occurred. We concluded that the authors did an excellent job with the experiments: many were conducted, and the authors reasoned about the experiments and their results professionally.
+\end{abstract}
+
+\begin{keywords}
+Distributed Data Processing Systems --- Delay Scheduling --- Reproducibility Study
+\end{keywords}
+
+\input{sections/introduction}
+
+\input{sections/experiments}
+
+\input{sections/reproduction}
+
+\input{sections/conclusion}
+
+\section*{Bibliography}
+%\bibliographystyle{plain} 
+\bibliography{bibliography}
+
+
+%\bibliography{}
+
+\end{document}
