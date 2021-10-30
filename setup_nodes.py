@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from helper import execute_on_host, parallel_map, run_command
 
-node_count = 12
+node_count = 3  # 12
 
 
 def replace_configuration_values(etc_root: Path, overrides: dict):
@@ -78,10 +78,10 @@ if __name__ == "__main__":
 
     cwd = run_command("pwd")
 
-    # run_command(f'preserve -# {node_count} -t 00:15:00')
+    run_command(f'preserve -# {node_count} -t 00:15:00')
 
     while True:
-        result = "node107 node108 node109 node110 node111 node112 node113 node114 node115 node116 node117 node118\n"  # run_command('preserve -llist | grep $USER')
+        result = run_command('preserve -llist | grep $USER')
         cells = result.split()
         if cells[-1] != "-":
             nodes = cells[-node_count:]
