@@ -1,26 +1,26 @@
-from time import sleep
 from pathlib import Path
+from time import sleep
 from typing import List, Optional
-from helper import parallel_map, run_command, execute_on_host
 
+from helper import execute_on_host, parallel_map, run_command
 
 node_count = 12
 
 
 def replace_configuration_values(etc_root: Path, overrides: dict):
-    for name in etc_root.glob('*'):
-        with open(name, 'r') as f:
+    for name in etc_root.glob("*"):
+        with open(name, "r") as f:
             content = f.read()
         for k, v in overrides.items():
-            content = content.replace(f'{{{k}}}', v)
-        with open(name, 'w') as f:
+            content = content.replace(f"{{{k}}}", v)
+        with open(name, "w") as f:
             f.write(content)
 
 
 def stop_node(hostname: str):
-   execute_on_host(
-       hostname, 
-       f'''
+    execute_on_host(
+        hostname,
+        f"""
             export JAVA_HOME=/usr
             export HADOOP_HOME=/local/s3052249/hadoop
             export HIVE_HOME=/local/s3052249/hive
@@ -29,14 +29,15 @@ def stop_node(hostname: str):
 
             $HADOOP_HOME/sbin/stop-dfs.sh
             rm -rf /local/s3052249
-        '''
+        """,
     )
 
-def clean_up(master: Optional[str]=None, nodes: List[str]=[]):
+
+def clean_up(master: Optional[str] = None, nodes: List[str] = []):
     if master:
         execute_on_host(
             master,
-            f'''
+            f"""
                 export JAVA_HOME=/usr
                 export HADOOP_HOME=/local/s3052249/hadoop
                 export HIVE_HOME=/local/s3052249/hive
@@ -46,80 +47,91 @@ def clean_up(master: Optional[str]=None, nodes: List[str]=[]):
                 $HADOOP_HOME/sbin/stop-yarn.sh
                 $HADOOP_HOME/bin/mapred --daemon stop historyserver
                 $DERBY_HOME/bin/stopNetworkServer
-            '''
+            """,
         )
-    
+
     if nodes:
         parallel_map(stop_node, nodes, chunk_size=1, concurrency=len(nodes))
 
-    run_command('rm -rf current-etc-hadoop hadoop.tar.gz hadoop hive.tar.gz hive derby.tar.gz derby')
+    run_command(
+        "rm -rf current-etc-hadoop hadoop.tar.gz hadoop hive.tar.gz hive derby.tar.gz derby"
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     clean_up()
 
-    run_command('curl https://dlcdn.apache.org/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz  --output hadoop.tar.gz')  # latest version
-    run_command('tar -xf hadoop.tar.gz && mv hadoop-3.3.1 hadoop')
+    run_command(
+        "curl https://dlcdn.apache.org/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz  --output hadoop.tar.gz"
+    )  # latest version
+    run_command("tar -xf hadoop.tar.gz && mv hadoop-3.3.1 hadoop")
 
-    run_command('curl https://dlcdn.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz  --output hive.tar.gz')  # latest version
-    run_command('tar -xf hive.tar.gz && mv apache-hive-3.1.2-bin hive')
+    run_command(
+        "curl https://dlcdn.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz  --output hive.tar.gz"
+    )  # latest version
+    run_command("tar -xf hive.tar.gz && mv apache-hive-3.1.2-bin hive")
 
-    run_command('curl https://dlcdn.apache.org//db/derby/db-derby-10.14.2.0/db-derby-10.14.2.0-bin.tar.gz  --output derby.tar.gz') # latest version supporting Java 8
-    run_command('tar -xf derby.tar.gz && mv db-derby-10.14.2.0-bin derby')
+    run_command(
+        "curl https://dlcdn.apache.org//db/derby/db-derby-10.14.2.0/db-derby-10.14.2.0-bin.tar.gz  --output derby.tar.gz"
+    )  # latest version supporting Java 8
+    run_command("tar -xf derby.tar.gz && mv db-derby-10.14.2.0-bin derby")
 
     cwd = run_command("pwd")
-    
+
     # run_command(f'preserve -# {node_count} -t 00:15:00')
 
     while True:
-        result = "node107 node108 node109 node110 node111 node112 node113 node114 node115 node116 node117 node118\n" # run_command('preserve -llist | grep $USER')
+        result = "node107 node108 node109 node110 node111 node112 node113 node114 node115 node116 node117 node118\n"  # run_command('preserve -llist | grep $USER')
         cells = result.split()
-        if cells[-1] != '-':
+        if cells[-1] != "-":
             nodes = cells[-node_count:]
             break
         sleep(2)
-        
-    print('Nodes: ', nodes)
+
+    print("Nodes: ", nodes)
 
     master = nodes[0]
     slaves = nodes[1:]
 
-    with open('hadoop/workers', 'w') as f:
-        f.write('\n'.join(slaves))
+    with open("hadoop/workers", "w") as f:
+        f.write("\n".join(slaves))
 
-    run_command('cp -r etc-hadoop current-etc-hadoop')
-
-    replace_configuration_values(
-        Path('current-etc-hadoop'),
-        {
-            'dps1AssignmentMasterNode': 'localhost',
-            'dps1AssignmentMasterNodeAll': '0.0.0.0',
-            'dps1HadoopPath': '/local/s3052249/hadoop'
-        }
-    )
-
-    run_command('cp current-etc-hadoop/* hadoop/etc/hadoop/')
-    run_command('cp etc-hive/* hive/conf/')
-
-    execute_on_host(master, f'rm -rf /local/s3052249 && mkdir -p /local/s3052249 && cp -r {cwd}/hadoop /local/s3052249')
-
-    run_command('rm -rf current-etc-hadoop && cp -r etc-hadoop current-etc-hadoop')
+    run_command("cp -r etc-hadoop current-etc-hadoop")
 
     replace_configuration_values(
-        Path('current-etc-hadoop'),
+        Path("current-etc-hadoop"),
         {
-            'dps1AssignmentMasterNode': master,
-            'dps1AssignmentMasterNodeAll': master,
-            'dps1HadoopPath': '/local/s3052249/hadoop'
-        }
+            "dps1AssignmentMasterNode": "localhost",
+            "dps1AssignmentMasterNodeAll": "0.0.0.0",
+            "dps1HadoopPath": "/local/s3052249/hadoop",
+        },
     )
 
-    run_command('cp current-etc-hadoop/* hadoop/etc/hadoop/')
+    run_command("cp current-etc-hadoop/* hadoop/etc/hadoop/")
+    run_command("cp etc-hive/* hive/conf/")
+
+    execute_on_host(
+        master,
+        f"rm -rf /local/s3052249 && mkdir -p /local/s3052249 && cp -r {cwd}/hadoop /local/s3052249",
+    )
+
+    run_command("rm -rf current-etc-hadoop && cp -r etc-hadoop current-etc-hadoop")
+
+    replace_configuration_values(
+        Path("current-etc-hadoop"),
+        {
+            "dps1AssignmentMasterNode": master,
+            "dps1AssignmentMasterNodeAll": master,
+            "dps1HadoopPath": "/local/s3052249/hadoop",
+        },
+    )
+
+    run_command("cp current-etc-hadoop/* hadoop/etc/hadoop/")
 
     def start_slaves(hostname: str):
         execute_on_host(
             hostname,
-            f'''
+            f"""
                 export JAVA_HOME=/usr
                 export HADOOP_HOME=/local/s3052249/hadoop
                 export HADOOP_CONF_DIR=/local/s3052249/hadoop/etc/hadoop
@@ -132,27 +144,27 @@ if __name__ == '__main__':
                 cp -r {cwd}/hive /local/s3052249
 
                 $HADOOP_HOME/sbin/start-dfs.sh
-            '''
+            """,
         )
 
     parallel_map(start_slaves, slaves, chunk_size=1, concurrency=len(nodes))
 
-    run_command('rm -rf current-etc-hadoop && cp -r etc-hadoop current-etc-hadoop')
+    run_command("rm -rf current-etc-hadoop && cp -r etc-hadoop current-etc-hadoop")
     replace_configuration_values(
-        Path('current-etc-hadoop'),
+        Path("current-etc-hadoop"),
         {
-            'dps1AssignmentMasterNode': master,
-            'dps1AssignmentMasterNodeAll': master,
-            'dps1HadoopPath': f'{cwd}/hadoop'
-        }
+            "dps1AssignmentMasterNode": master,
+            "dps1AssignmentMasterNodeAll": master,
+            "dps1HadoopPath": f"{cwd}/hadoop",
+        },
     )
-    run_command('cp current-etc-hadoop/* hadoop/etc/hadoop/')
+    run_command("cp current-etc-hadoop/* hadoop/etc/hadoop/")
 
     try:
         print(nodes)
         execute_on_host(
             master,
-            f'''
+            f"""
                 export JAVA_HOME=/usr
                 export HADOOP_HOME=/local/s3052249/hadoop
                 export HADOOP_CONF_DIR=/local/s3052249/hadoop/etc/hadoop
@@ -182,7 +194,7 @@ if __name__ == '__main__':
 
                 $HIVE_HOME/bin/schematool -dbType derby -initSchema
                 $HIVE_HOME/bin/hiveserver2
-            '''
+            """,
         )
     except KeyboardInterrupt:
         print("\nStopping beacuse of keyboard interrupt")
