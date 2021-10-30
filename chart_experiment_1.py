@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 import logging
 
-plt.rc('font', size=12)
+plt.rc('font', size=14)
 
 logging.basicConfig(level=logging.ERROR)
 fifo = [
@@ -82,7 +82,6 @@ plt.ylim(ymin=0)
 plt.title('CDF for job bins 4-8')
 plt.legend(frameon=False)
 
-
 plt.subplot(1, 3, 3)
 chart_bin(2)
 plt.xlim(xmin=0)
@@ -91,5 +90,8 @@ plt.xlabel('Time (s)')
 plt.title('CDF for job bin 9')
 plt.legend(loc='lower left', frameon=False)
 
-plt.show()
+fig.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(15, 5)
+plt.savefig('figures/running-times.png', bbox_inches='tight', dpi=400)
 plt.close()

@@ -6,6 +6,7 @@ import scipy.stats as st
 from pathlib import Path
 import json
 
+
 fifo = [
     Path('results/test-6'),
     Path('results/test-7'),
@@ -37,41 +38,52 @@ def get_bin_averages(path):
     return bin_averages
 
 
-fifo_bin_avgs = [get_bin_averages(f) for f in fifo]
-fair_bin_avgs = [get_bin_averages(f) for f in fair]
+
 delay_bin_avgs = [get_bin_averages(f) for f in delay]
 
-speedup = [
-    [f/d for f, d in zip(fs, ds)] for fs, ds in zip(fair_bin_avgs, delay_bin_avgs)
-]
-speedup = zip(*speedup)
+plt.rc('font', size=16)
 
-def mean_confidence_interval(data, confidence=0.95):
-    return st.t.interval(confidence, len(data)-1, loc=np.mean(data), scale=st.sem(data))
+def chart(bin_avgs, name):
+    speedup = [
+        [f/d for f, d in zip(fs, ds)] for fs, ds in zip(bin_avgs, delay_bin_avgs)
+    ]
+    speedup = zip(*speedup)
+
+    def mean_confidence_interval(data, confidence=0.95):
+        return st.t.interval(confidence, len(data)-1, loc=np.mean(data), scale=st.sem(data))
 
 
-lu_bars = []
-lu_cis = []
-for d in speedup:
-    f, t = mean_confidence_interval(d)
-    mean = np.mean(d)
-    lu_bars.append(mean)
-    ci = np.std(d)
-    lu_cis.append(ci)
+    lu_bars = []
+    lu_cis = []
+    for d in speedup:
+        f, t = mean_confidence_interval(d)
+        mean = np.mean(d)
+        lu_bars.append(mean)
+        ci = np.std(d)
+        lu_cis.append(ci)
 
-# width of the bars
-barWidth = 0.6
+    # width of the bars
+    barWidth = 0.8
 
-# The x position of bars
-r1 = np.arange(len(lu_bars))
-r2 = [x + barWidth for x in r1]
+    # The x position of bars
+    r1 = np.arange(len(lu_bars))
+    r2 = [x + barWidth for x in r1]
 
-plt.bar(r1, lu_bars, width = barWidth, color = '#555555', yerr=lu_cis, capsize=7)
+    plt.bar(r1, lu_bars, width = barWidth, color = '#555555', yerr=lu_cis, capsize=7)
 
-plt.xticks(range(len(lu_bars)))
-plt.ylabel('Avg. Speedup from Delay Scheduling')
-plt.xlabel('Bin')
-fig = plt.gcf()
-fig.set_size_inches(10.5, 5.5)
-plt.ylim(ymin=0)
-plt.show()
+    plt.xticks(range(len(lu_bars)))
+    plt.ylabel('Speedup')
+    plt.xlabel('Bin')
+    plt.ylim(ymin=0)
+
+    fig = plt.gcf()
+    fig.set_size_inches(15, 5)
+
+    plt.savefig(f'figures/{name}', bbox_inches='tight', dpi=400)
+    plt.close()
+
+
+fifo_bin_avgs = [get_bin_averages(f) for f in fifo]
+fair_bin_avgs = [get_bin_averages(f) for f in fair]
+chart(fifo_bin_avgs, 'delay-fifo-speedup')
+chart(fair_bin_avgs, 'delay-fair-speedup')
