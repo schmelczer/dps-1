@@ -33,7 +33,7 @@ python3 chart_experiment_2.py
 ## Results
 
 ### Figure 1
-![charts](figures/running_times.png)
+![charts](figures/running-times.png)
 > CDFs of running times of jobs in various bin ranges in the IO-heavy workload. Fair sharing greatly improves performance for small jobs, at the cost of slowing the largest jobs. Delay scheduling further improves performance, especially for medium-sized jobs.
 
 ### Figure 2
